@@ -10,7 +10,7 @@ Matthew 11:28-30
 #########Breadboard circuit mounting:########
  * LCD VSS pin to ground
  * LCD VDD pin to +5V
- * 2K2Ohm resistor: ends to VO pin and ground
+ * 2K2Ohm resistor: ends to LCD VO pin and ground
  * LCD RS pin to digital pin 9
  * LCD R/W pin to ground
  * LCD Enable pin to digital pin 8
