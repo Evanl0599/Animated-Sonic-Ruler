@@ -96,9 +96,10 @@ int playSong(int track, float durConst){
   }
 }
 
-//Declaring a variable that
+//Declaring a variable that will count the millis so the blinking is independent of "delays"
 unsigned long millisCounter = 0;
 int displaying = 0;
+
 ////////////////////////////////////
 //////////////SETUP/////////////////
 ////////////////////////////////////
@@ -135,10 +136,11 @@ void loop()
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
+  //Measures the distance
   duration = pulseIn(echoPin, HIGH);
   distance = (duration/2) / 29.1;
 
-  if (distance >= 400 || distance <= 0){
+  if (distance >= 400 || distance <= 0){//Evaluate the distance value.
     lcd.setCursor(0, 0);
     lcd.print("Fora do alcance    ");
     lcd.setCursor(0, 1);
@@ -157,9 +159,10 @@ void loop()
     //Distance animation
     if(distance <= 10)
     {
-      if(millisNow-millisCounter>50 && displaying == 0){
-      lcd.setCursor(10, 0);
-      lcd.write(byte(0));
+      if(millisNow-millisCounter>50 && displaying == 0){//This part is used for the blinking while at 10 cm less.
+      //Each of these "lcd.setCursor" and "lcd.write" are responsible for the drawings.
+      lcd.setCursor(10, 0);//This positionates the cursor on the desired slot
+      lcd.write(byte(0));//This writes the prefab symbols
       lcd.write(byte(1));
       lcd.write(byte(4));
       lcd.write(" ");
@@ -172,7 +175,7 @@ void loop()
       lcd.write(" ");
       lcd.write(" ");
       lcd.write(" ");
-      playSong(1,1.30);
+      playSong(1,1.30);//This plays the "beep"
       millisCounter = millisNow;
       displaying = 1;
       } else {lcd.setCursor(10, 0);lcd.write("      ");lcd.setCursor(10, 1);lcd.write("      ");playSong(1,1.30);displaying=0;millisCounter = millisNow;}
